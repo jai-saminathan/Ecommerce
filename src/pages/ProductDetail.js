@@ -8,11 +8,11 @@ export default function ProductDetail({ cartItems, setCartItems }) {
   const { id } = useParams();
 
   useEffect(() => {
-    console.log("Product ID:", id); 
+    console.log("Product ID:", id);
     const fetchProduct = async () => {
       try {
-        const apiUrl = `${process.env.REACT_APP_API_URL}/product/` + id; 
-        console.log("API URL:", apiUrl); 
+        const apiUrl = `${process.env.REACT_APP_API_URL}/product/` + id;
+        console.log("API URL:", apiUrl);
         const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error("Failed to fetch product");
@@ -21,13 +21,14 @@ export default function ProductDetail({ cartItems, setCartItems }) {
         console.log("Fetched product:", data);
 
         if (data.product) {
-          setProduct(data.product); 
+          setProduct(data.product);
+        } else {
           console.error("Product not found in response");
           setProduct(null);
         }
       } catch (error) {
         console.error("Error fetching product:", error);
-        setProduct(null); 
+        setProduct(null);
       }
     };
 
@@ -70,7 +71,7 @@ export default function ProductDetail({ cartItems, setCartItems }) {
   };
 
   if (!product) {
-    return <div>Product not found or loading...</div>; 
+    return <div>Product not found or loading...</div>;
   }
 
   return (
